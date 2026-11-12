@@ -204,6 +204,7 @@ Professional write-ups of both detections — summary, timeline, indicators
   the threshold.
 - **Resource tuning:** adapted a full SIEM stack to an 8 GB host with swap and
   reduced indexer memory.
+- **Locked myself out:** fail2ban banned my own IP mid-test, which taught me why trusted IPs must be whitelisted (ignoreip) in real environments.
 
 ---
 
