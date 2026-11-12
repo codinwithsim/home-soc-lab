@@ -150,6 +150,26 @@ built-in events (new group, sudo to root).
 
 ---
 
+
+## Phase 5 — Automated Response with fail2ban
+
+Detection is only half the job — this phase adds automated **response**.
+I deployed fail2ban to watch the SSH authentication log and automatically
+ban any IP that exceeds a failure threshold (3 failures in 5 minutes),
+blocking it at the firewall for 10 minutes.
+
+I verified it by running a brute-force against my own server: after three
+failed attempts, fail2ban banned the source IP automatically — which even
+dropped my active SSH session, a firsthand lesson in why automated response
+must whitelist trusted IPs (the `ignoreip` setting). The ban auto-expired
+exactly 10 minutes later, matching the configured bantime.
+
+![fail2ban ban lifecycle](screenshots/phase5-fail2ban-ban.png)
+
+**What this adds:** the lab now detects attacks (Wazuh SIEM) *and* responds
+to them automatically (fail2ban) — the core idea behind SOAR (Security
+Orchestration, Automation, and Response).
+
 ## Incident Reports
 
 Professional write-ups of both detections — summary, timeline, indicators
